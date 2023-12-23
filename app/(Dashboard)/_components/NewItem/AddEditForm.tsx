@@ -26,6 +26,7 @@ import UploadMultipleImages from "@/components/UploadMultipleImages";
 import Heading from "@/components/heading";
 import UploadSingleItem from "@/components/UploadSingleItem";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Switch } from "@/components/ui/switch";
 
 // form velidation
 const formSchema = z.object({
@@ -99,13 +100,13 @@ const AddEditForm = ({ initialData, id }: AddEditFormProps) => {
 
   // submit values
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(value);
     setIsLoading(true);
     const uploadValues = {
       ...values,
       userId: user?.id,
       expiryDate: `${value}`,
     };
+
     try {
       if (Object.keys(initialData).length > 0) {
         await UpdateDcoument("items", id, uploadValues);
@@ -241,19 +242,19 @@ const AddEditForm = ({ initialData, id }: AddEditFormProps) => {
               control={form.control}
               name="bidding"
               render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                  <div className="space-y-1 leading-none">
+                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+                  <div className="space-y-0.5">
                     <FormLabel>Close or Open Item for Bidding</FormLabel>
                     <FormDescription>
                       This Item will not appear anywhere in the auction house.
                     </FormDescription>
                   </div>
+                  <FormControl>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
                 </FormItem>
               )}
             />

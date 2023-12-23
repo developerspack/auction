@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: ItemPageProps) {
   }
 
   return {
-    Name: Name === "" ? "Create Item" : `Edit: ${Name}`,
+    title: Name === "" ? "Create Item" : `Edit: ${Name}`,
   };
 }
 

@@ -24,10 +24,10 @@ import { toast } from "react-hot-toast";
 import { db, storage } from "@/lib/firebase";
 
 // Hnadle Delete
-export const handleDelete = async (
+export const HandleDelete = async (
   id: string,
   collectionName: string,
-  imageUrl: string
+  imageUrl?: string
 ) => {
   const notification = toast.loading(`Deleteting ${collectionName}...`);
   try {
