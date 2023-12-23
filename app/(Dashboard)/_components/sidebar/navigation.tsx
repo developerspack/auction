@@ -20,22 +20,22 @@ export const Navigation = () => {
       active: FaUserCircle,
     },
     {
-      label: "Create Product",
-      href: `/u/${user?.id}/create`,
+      label: "Create Item",
+      href: `/u/${user?.id}/new`,
       icon: MdOutlineCreateNewFolder,
       active: MdCreateNewFolder,
     },
   ];
 
-  if (!user?.id) {
-    return (
-      <ul className="space-y-2">
-        {[...Array(4)].map((_, i) => (
-          <NavItemSkeleton key={i} />
-        ))}
-      </ul>
-    );
-  }
+  // if (!user?.id) {
+  //   return (
+  //     <ul className="space-y-2">
+  //       {[...Array(4)].map((_, i) => (
+  //         <NavItemSkeleton key={i} />
+  //       ))}
+  //     </ul>
+  //   );
+  // }
 
   return (
     <ul className="space-y-2 px-2 pt-4 lg:pt-0">

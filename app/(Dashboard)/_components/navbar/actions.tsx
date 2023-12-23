@@ -3,6 +3,7 @@ import { FiLogOut } from "react-icons/fi";
 import { UserButton } from "@clerk/nextjs";
 
 import { Button } from "@/components/ui/button";
+import { ThemeDropDown } from "@/components/theme/ThemeDropDown";
 
 export const Actions = () => {
   return (
@@ -19,6 +20,7 @@ export const Actions = () => {
         </Link>
       </Button>
       <UserButton afterSignOutUrl="/" />
+      <ThemeDropDown />
     </div>
   );
 };
