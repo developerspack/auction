@@ -70,7 +70,7 @@ const AddEditForm = ({ initialData, id }: AddEditFormProps) => {
         }
       }
       setOtherImages(initialData.otherImages);
-      setTumbnail(initialData.Tumbnail);
+      setTumbnail(initialData.Thumbnail);
       setVideo(initialData.video);
 
       setValue(initialData.expiryDate);
