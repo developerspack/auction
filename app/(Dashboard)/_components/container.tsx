@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import { useMediaQuery } from "usehooks-ts";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
@@ -13,7 +12,6 @@ interface ContainerProps {
 }
 
 export const Container = ({ children }: ContainerProps) => {
-  const { data: session } = useSession();
   const router = useRouter();
   const { collapsed, onCollapse, onExpand } = useAuctioneerSidebar(
     (state) => state
@@ -28,11 +26,9 @@ export const Container = ({ children }: ContainerProps) => {
     }
   }, [matches, onCollapse, onExpand]);
 
-  useEffect(() => {
-    if (!session) {
-      router.push("/");
-    }
-  }, [session]);
+  // useEffect(() => {
+
+  // }, []);
 
   return (
     <div

@@ -11,6 +11,7 @@ interface itemProps {
 }
 
 interface userProps {
+  isLoggedIn: boolean;
   id: string;
   email: string;
   Name: string;

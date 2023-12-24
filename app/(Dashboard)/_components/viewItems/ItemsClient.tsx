@@ -1,16 +1,17 @@
 "use client";
 
 import { Suspense } from "react";
-import { useSession } from "next-auth/react";
 
 import { DataTable } from "@/components/ui/DataTable";
 import { Skeleton } from "@/components/ui/skeleton";
 import { columns } from "./Columns";
 import { FetchCollection } from "@/Hooks/Hooks";
+import { useUserStore } from "@/store/user";
 
 const ItemsClient = () => {
-  const { data: session } = useSession();
-  const { data } = FetchCollection("items", session?.user.id!, true, "userId");
+  const { user } = useUserStore();
+
+  const { data } = FetchCollection("items", user.id, true, "userId");
 
   return (
     <div className="h-full w-full">

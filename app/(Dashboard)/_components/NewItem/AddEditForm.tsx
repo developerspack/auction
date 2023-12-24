@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import DateTimePicker from "react-datetime-picker";
-import { useSession } from "next-auth/react";
 
 import {
   Form,
@@ -31,6 +30,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useUserStore } from "@/store/user";
 
 // form velidation
 const formSchema = z.object({
@@ -60,7 +60,7 @@ const AddEditForm = ({ initialData, id }: AddEditFormProps) => {
   const [video, setVideo] = useState<string | null>(null);
   const [value, setValue] = useState<Value>(new Date());
 
-  const { data: session } = useSession();
+  const { user } = useUserStore();
 
   useEffect(() => {
     if (Object.keys(initialData).length > 0) {
@@ -109,7 +109,7 @@ const AddEditForm = ({ initialData, id }: AddEditFormProps) => {
     setIsLoading(true);
     const uploadValues = {
       ...values,
-      userId: session && session.user.id,
+      userId: user.id,
       expiryDate: `${value}`,
     };
 

@@ -2,11 +2,9 @@
 
 import { AiFillCopy, AiFillDelete } from "react-icons/ai";
 import { BiEdit } from "react-icons/bi";
-import { TbConfetti } from "react-icons/tb";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -18,6 +16,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { HandleDelete } from "@/Hooks/Hooks";
+import { useUserStore } from "@/store/user";
 
 interface CellActionProps {
   data: itemProps;
@@ -26,7 +25,7 @@ interface CellActionProps {
 
 const CellActions = ({ data, Name }: CellActionProps) => {
   const router = useRouter();
-  const { data: session } = useSession();
+  const { user } = useUserStore();
 
   const OnCopy = (id: string) => {
     navigator.clipboard.writeText(id);
@@ -48,7 +47,7 @@ const CellActions = ({ data, Name }: CellActionProps) => {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          onClick={() => router.push(`/u/${session?.user?.id}/${data.id}`)}
+          onClick={() => router.push(`/u/${user?.id}/${data.id}`)}
         >
           <BiEdit className="h-4 w-4 mr-2 text-green-400" />
           Edit

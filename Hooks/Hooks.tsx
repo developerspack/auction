@@ -11,6 +11,7 @@ import {
   getDocs,
   onSnapshot,
   query,
+  setDoc,
   updateDoc,
   where,
 } from "firebase/firestore";
@@ -20,9 +21,58 @@ import {
   ref,
   uploadString,
 } from "firebase/storage";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { toast } from "react-hot-toast";
 
-import { db, storage } from "@/lib/firebase";
+import { auth, db, storage } from "@/lib/firebase";
+import { useUserStore } from "@/store/user";
+import { Button } from "@/components/ui/button";
+
+export const LoginWithGoogle = () => {
+  const { setUser } = useUserStore();
+  // login with google
+  const Login = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // UserState
+        const GetUser = async () => {
+          const DocRef = doc(db, "users", result.user.uid);
+          const DocSnap = await getDoc(DocRef);
+          if (!DocSnap.exists()) {
+            setDoc(doc(db, "users", result.user.uid), {
+              id: result.user.uid,
+              email: result.user.email,
+              photo: result.user.photoURL,
+              name: result.user.displayName,
+              createdAt: Timestamp.now().toDate(),
+            });
+          }
+        };
+
+        const authData = {
+          isLoggedIn: true,
+          email: result.user.email,
+          name: result.user.displayName,
+          photo: result.user.photoURL,
+          id: result.user.uid,
+        };
+        localStorage.setItem("auth", JSON.stringify(authData));
+        // @ts-ignore
+        setUser(authData);
+        GetUser();
+        toast.success("Login Successful");
+      })
+      .catch((error: any) => {
+        toast.error(error.message);
+      });
+  };
+  return (
+    <Button size="sm" variant="primary" onClick={() => Login()}>
+      Login
+    </Button>
+  );
+};
 
 // Hnadle Delete
 export const HandleDelete = async (
