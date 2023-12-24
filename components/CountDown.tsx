@@ -36,7 +36,7 @@ const CountDown = ({ expiryDate }: { expiryDate: string }) => {
     <div className="countdown">
       <CountdownCircleTimer
         {...timerProps}
-        size={80}
+        size={82}
         colors="#7E2E84"
         duration={daysDuration}
         initialRemainingTime={remainingTime}
@@ -51,7 +51,7 @@ const CountDown = ({ expiryDate }: { expiryDate: string }) => {
         {...timerProps}
         colors="#D14081"
         duration={daySeconds}
-        size={80}
+        size={82}
         initialRemainingTime={remainingTime % daySeconds}
         onComplete={(totalElapsedTime) => ({
           shouldRepeat: remainingTime - totalElapsedTime > hourSeconds,
@@ -66,7 +66,7 @@ const CountDown = ({ expiryDate }: { expiryDate: string }) => {
       <CountdownCircleTimer
         {...timerProps}
         colors="#EF798A"
-        size={80}
+        size={82}
         duration={hourSeconds}
         initialRemainingTime={remainingTime % hourSeconds}
         onComplete={(totalElapsedTime) => ({
@@ -81,7 +81,7 @@ const CountDown = ({ expiryDate }: { expiryDate: string }) => {
       </CountdownCircleTimer>
       <CountdownCircleTimer
         {...timerProps}
-        size={80}
+        size={82}
         colors="#218380"
         duration={minuteSeconds}
         initialRemainingTime={remainingTime % minuteSeconds}

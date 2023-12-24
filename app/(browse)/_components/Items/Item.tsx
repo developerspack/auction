@@ -6,7 +6,7 @@ import { ResultCard, ResultCardSkeleton } from "./ItemCard";
 import { FetchCollection } from "@/Hooks/Hooks";
 
 export const Item = async () => {
-  const { data } = FetchCollection("items", "Open", true, "bidding");
+  const { data } = FetchCollection("items", "Open", "bidding");
 
   return (
     <div>

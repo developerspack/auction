@@ -26,7 +26,9 @@ export const ResultCard = ({ data }: ItemCardProps) => {
         <span className="font-medium text-lg text-blue-500">
           Bidding Closes In:{" "}
         </span>{" "}
-        <CountDown expiryDate={data.expiryDate} />
+        <div className="overflow-auto">
+          <CountDown expiryDate={data.expiryDate} />
+        </div>
         <div className="flex gap-x-3 p-2">
           <div className="flex flex-col text-sm overflow-hidden">
             <p className="truncate font-semibold text-base hover:text-blue-500">

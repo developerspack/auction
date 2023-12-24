@@ -10,6 +10,7 @@ import {
   getDoc,
   getDocs,
   onSnapshot,
+  orderBy,
   query,
   setDoc,
   updateDoc,
@@ -141,20 +142,18 @@ export const UpdateDcoument = async (
 // get collection
 export const FetchCollection = (
   collectionName: string,
-  useWhere: string,
-  value?: string | boolean,
-  field?: string
+  value: string | boolean,
+  field: string
 ) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<itemProps | userProps | any>([]);
   const [loading, setloading] = useState(true);
 
   const getCollection = () => {
     try {
-      const docRef = collection(db, collectionName);
-      const q =
-        useWhere === "yes"
-          ? query(docRef, where(field!, "==", value))
-          : query(docRef);
+      const q = query(
+        collection(db, collectionName),
+        where(field, "==", value)
+      );
       // const q = query(docRef, orderBy("createdAt", "desc"));
       onSnapshot(q, (snapshot) => {
         // console.log(snapshot.docs);
@@ -204,6 +203,6 @@ export const FetchDocument = (collectionName: string, id: string) => {
       }
     };
     id && getDocument();
-  }, [id]);
+  }, [id, document]);
   return { isLoading, document };
 };

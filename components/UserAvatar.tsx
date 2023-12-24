@@ -29,6 +29,17 @@ const UserAvatar = () => {
       photo: "",
       createdAt: "",
     });
+    localStorage.setItem(
+      "auth",
+      JSON.stringify({
+        isLoggedIn: false,
+        id: "",
+        email: "",
+        Name: "",
+        photo: "",
+        createdAt: "",
+      })
+    );
     router.push("/");
   };
 
