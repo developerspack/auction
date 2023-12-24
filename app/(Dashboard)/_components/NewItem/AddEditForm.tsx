@@ -4,14 +4,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useUser } from "@clerk/nextjs";
 import * as z from "zod";
 import DateTimePicker from "react-datetime-picker";
+import { useSession } from "next-auth/react";
 
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -25,17 +24,23 @@ import { Textarea } from "@/components/ui/textarea";
 import UploadMultipleImages from "@/components/UploadMultipleImages";
 import Heading from "@/components/heading";
 import UploadSingleItem from "@/components/UploadSingleItem";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Switch } from "@/components/ui/switch";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 // form velidation
 const formSchema = z.object({
   Name: z.string().min(1),
-  Tumbnail: z.string().min(1),
+  Thumbnail: z.string().min(1),
   otherImages: z.string().array(),
-  bidding: z.boolean().default(true).optional(),
+  bidding: z.string().default("Open"),
   video: z.string().min(1),
   Description: z.string().min(1),
+  startingPrice: z.number().default(0),
 });
 
 interface AddEditFormProps {
@@ -55,7 +60,7 @@ const AddEditForm = ({ initialData, id }: AddEditFormProps) => {
   const [video, setVideo] = useState<string | null>(null);
   const [value, setValue] = useState<Value>(new Date());
 
-  const { user } = useUser();
+  const { data: session } = useSession();
 
   useEffect(() => {
     if (Object.keys(initialData).length > 0) {
@@ -89,8 +94,9 @@ const AddEditForm = ({ initialData, id }: AddEditFormProps) => {
         Thumbnail: "",
         video: "",
         otherImages: [],
-        bidding: true,
+        bidding: "Open",
         Description: "",
+        startingPrice: 0,
       };
 
   const form = useForm({
@@ -103,7 +109,7 @@ const AddEditForm = ({ initialData, id }: AddEditFormProps) => {
     setIsLoading(true);
     const uploadValues = {
       ...values,
-      userId: user?.id,
+      userId: session && session.user.id,
       expiryDate: `${value}`,
     };
 
@@ -134,7 +140,7 @@ const AddEditForm = ({ initialData, id }: AddEditFormProps) => {
           {/* image */}
           <FormField
             control={form.control}
-            name="Tumbnail"
+            name="Thumbnail"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Item Thumbnail</FormLabel>
@@ -201,9 +207,26 @@ const AddEditForm = ({ initialData, id }: AddEditFormProps) => {
               name="Name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Title</FormLabel>
+                  <FormLabel>Name</FormLabel>
                   <FormControl>
                     <Input disabled={isLoading} placeholder="Name" {...field} />
+                  </FormControl>
+                  <FormMessage className="text-red-500" />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="startingPrice"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Starting Price</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={isLoading}
+                      placeholder="Starting Price"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage className="text-red-500" />
                 </FormItem>
@@ -238,23 +261,30 @@ const AddEditForm = ({ initialData, id }: AddEditFormProps) => {
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="bidding"
               render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
-                  <div className="space-y-0.5">
-                    <FormLabel>Close or Open Item for Bidding</FormLabel>
-                    <FormDescription>
-                      This Item will not appear anywhere in the auction house.
-                    </FormDescription>
-                  </div>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
+                <FormItem>
+                  <FormLabel>Select If Bidding Is closed or Open</FormLabel>
+                  <Select
+                    disabled={isLoading}
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select If Bidding Is closed or Open" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="Open">Open</SelectItem>
+                      <SelectItem value="Closed">Closed</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
                 </FormItem>
               )}
             />

@@ -1,29 +1,36 @@
 "use client";
 
-import { useUser } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import { CgProfile } from "react-icons/cg";
 import { MdCreateNewFolder, MdOutlineCreateNewFolder } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
+import { useSession } from "next-auth/react";
+import { RiProductHuntFill, RiProductHuntLine } from "react-icons/ri";
 
 import { NavItem, NavItemSkeleton } from "./nav-item";
 
 export const Navigation = () => {
   const pathname = usePathname();
-  const { user } = useUser();
+  const { data: session } = useSession();
 
   const routes = [
     {
       label: "Profile",
-      href: `/u/${user?.id}`,
+      href: `/u/${session?.user?.id}`,
       icon: CgProfile,
       active: FaUserCircle,
     },
     {
       label: "Create Item",
-      href: `/u/${user?.id}/new`,
+      href: `/u/${session?.user?.id}/new`,
       icon: MdOutlineCreateNewFolder,
       active: MdCreateNewFolder,
+    },
+    {
+      label: "View Item",
+      href: `/u/${session?.user?.id}/viewItems`,
+      icon: RiProductHuntLine,
+      active: RiProductHuntFill,
     },
   ];
 

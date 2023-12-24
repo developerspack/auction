@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "react-hot-toast";
 
 import "./globals.css";
@@ -10,8 +9,14 @@ import "react-clock/dist/Clock.css";
 
 import { ThemeProvider } from "@/components/Providers/ThemeProvider";
 import { cn } from "@/lib/utils";
+import { NextAuthProvider } from "@/components/Providers/NextAuthProvider ";
 
 const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "Auction House",
+  description: "Auction House",
+};
 
 export default function RootLayout({
   children,
@@ -20,8 +25,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <ClerkProvider>
-        <body className={cn("dark:bg-black bg-white", inter.className)}>
+      <body className={cn("dark:bg-black bg-white", inter.className)}>
+        <NextAuthProvider>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -29,11 +34,10 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Toaster position="bottom-left" reverseOrder={false} />
-
             {children}
           </ThemeProvider>
-        </body>
-      </ClerkProvider>
+        </NextAuthProvider>
+      </body>
     </html>
   );
 }

@@ -12,6 +12,7 @@ import {
   onSnapshot,
   query,
   updateDoc,
+  where,
 } from "firebase/firestore";
 import {
   deleteObject,
@@ -88,14 +89,22 @@ export const UpdateDcoument = async (
 };
 
 // get collection
-export const FetchCollection = (collectionName: string) => {
+export const FetchCollection = (
+  collectionName: string,
+  useWhere: string,
+  value?: string | boolean,
+  field?: string
+) => {
   const [data, setData] = useState([]);
   const [loading, setloading] = useState(true);
 
   const getCollection = () => {
     try {
       const docRef = collection(db, collectionName);
-      const q = query(docRef);
+      const q =
+        useWhere === "yes"
+          ? query(docRef, where(field!, "==", value))
+          : query(docRef);
       // const q = query(docRef, orderBy("createdAt", "desc"));
       onSnapshot(q, (snapshot) => {
         // console.log(snapshot.docs);
@@ -123,7 +132,7 @@ export const FetchCollection = (collectionName: string) => {
 
 // get doc
 export const FetchDocument = (collectionName: string, id: string) => {
-  const [document, setDocument] = useState({});
+  const [document, setDocument] = useState<itemProps | userProps | any>({});
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

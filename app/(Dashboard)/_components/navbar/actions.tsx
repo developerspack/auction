@@ -1,9 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import { FiLogOut } from "react-icons/fi";
-import { UserButton } from "@clerk/nextjs";
 
 import { Button } from "@/components/ui/button";
 import { ThemeDropDown } from "@/components/theme/ThemeDropDown";
+import UserAvatar from "@/components/UserAvatar";
 
 export const Actions = () => {
   return (
@@ -19,7 +21,7 @@ export const Actions = () => {
           Exit
         </Link>
       </Button>
-      <UserButton afterSignOutUrl="/" />
+      <UserAvatar />
       <ThemeDropDown />
     </div>
   );
