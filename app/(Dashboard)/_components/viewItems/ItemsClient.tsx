@@ -13,7 +13,7 @@ const ItemsClient = () => {
   const { data } = FetchCollection("items", session?.user.id!, true, "userId");
 
   return (
-    <div className="h-full p-8 max-w-screen-2xl mx-auto">
+    <div className="h-full w-full">
       <Suspense fallback={<ItemsSkeleton />}>
         <DataTable columns={columns} data={data} filterKey={"Name"} />
       </Suspense>

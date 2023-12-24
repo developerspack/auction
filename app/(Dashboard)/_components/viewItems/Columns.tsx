@@ -68,7 +68,7 @@ export const columns: ColumnDef<itemProps>[] = [
 
   {
     accessorKey: "expiryDate",
-    header: "Closes or closed on",
+    header: "Closes or closed",
     cell: ({ row }) => <Moment fromNow>{row.getValue("expiryDate")}</Moment>,
   },
   {
