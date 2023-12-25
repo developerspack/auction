@@ -70,12 +70,12 @@ const BidModal = ({
         body: JSON.stringify({ email, message, subject }),
       });
       try {
-        // await addDoc(collection(db, "bids"), {
-        //   bid: values.bid,
-        //   userId: user.id,
-        //   ItemId: id,
-        //   createdAt: Timestamp.now().toDate(),
-        // });
+        await addDoc(collection(db, "bids"), {
+          bid: values.bid,
+          userId: user.id,
+          ItemId: id,
+          createdAt: Timestamp.now().toDate(),
+        });
         toast.success("Bid Sent Successfully", {
           id: notification,
         });
@@ -93,8 +93,8 @@ const BidModal = ({
       <DialogHeader>
         <DialogTitle className="line-clamp-1">Bidding for {name}</DialogTitle>
         <DialogDescription>
-          After Bidding the Auctioneer will be notified. Click Bid when you're
-          done.
+          After Bidding the Auctioneer will be notified. Click Bid when
+          you&apos;re done.
         </DialogDescription>
         <span className="text-blue-500">
           N/B: Bid More than the starting price: Ksh.{startingPrice}
@@ -104,7 +104,6 @@ const BidModal = ({
         <form
           onSubmit={form.handleSubmit(
             // @ts-ignore
-
             onSubmit
           )}
         >
