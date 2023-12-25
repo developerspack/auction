@@ -73,13 +73,13 @@ const ItemDetails = ({
       <div className="block lg:flex gap-5">
         <div className="w-full block mt-10 lg:mt-0">
           {/* image */}
-          <div className="h-[480px] p-2 bg-[#313030]/10 dark:bg-[#313030] rounded-lg">
+          <div className="lg:h-[480px] p-2 bg-[#313030]/10 dark:bg-[#313030] rounded-lg">
             <Image
               src={Thumbnail}
               height={500}
               width={500}
               alt={Name}
-              className="rounded-lg h-full w-full"
+              className="rounded-lg h-full w-full object-contain"
               loading="lazy"
             />
           </div>

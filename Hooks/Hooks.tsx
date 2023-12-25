@@ -54,7 +54,7 @@ export const LoginWithGoogle = () => {
         const authData = {
           isLoggedIn: true,
           email: result.user.email,
-          name: result.user.displayName,
+          Name: result.user.displayName,
           photo: result.user.photoURL,
           id: result.user.uid,
         };

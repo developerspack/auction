@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
@@ -44,14 +44,16 @@ const BidModal = ({
   id,
   name,
   startingPrice,
-  userName,
   email,
   open,
   setOpen,
+  userName,
 }: BidModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useUserStore();
-  // console.log(user);
+
+  useEffect(() => {}, [userName]);
+
   const form = useForm({
     resolver: zodResolver(formSchema),
   });
@@ -62,8 +64,8 @@ const BidModal = ({
       );
     } else {
       setIsLoading(true);
-      const notification = toast.loading("Sending Bid");
-      const message = `${user.Name} have bid ${values.bid} for ${name}`;
+      const notification = toast.loading("Sending Bid...");
+      const message = `${user.Name} have bid Ksh.${values.bid} for ${name}`;
       const subject = `A Bid for ${name}`;
       await fetch("/api/email", {
         method: "POST",
@@ -80,6 +82,7 @@ const BidModal = ({
           id: notification,
         });
       } catch (error) {
+        setIsLoading(false);
         toast.error((error as Error).message, {
           id: notification,
         });
