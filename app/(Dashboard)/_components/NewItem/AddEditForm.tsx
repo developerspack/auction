@@ -40,7 +40,7 @@ const formSchema = z.object({
   bidding: z.string().default("Open"),
   video: z.string().min(1),
   Description: z.string().min(1),
-  startingPrice: z.number().default(0),
+  startingPrice: z.coerce.number().default(0),
 });
 
 interface AddEditFormProps {
@@ -120,7 +120,7 @@ const AddEditForm = ({ initialData, id }: AddEditFormProps) => {
         await uploadDocument("items", uploadValues);
       }
       setIsLoading(false);
-      // router.push("/");
+      router.push(`/u/${user.id}/viewItems`);
     } catch (error) {
       console.error("Error uploading to Firebase:", error);
       setIsLoading(false);
@@ -225,6 +225,7 @@ const AddEditForm = ({ initialData, id }: AddEditFormProps) => {
                     <Input
                       disabled={isLoading}
                       placeholder="Starting Price"
+                      type="number"
                       {...field}
                     />
                   </FormControl>

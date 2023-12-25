@@ -28,7 +28,7 @@ const ItemDetails = ({
 
   const { user } = useUserStore();
   const { document } = FetchDocument("users", userId);
-
+  // console.log(user);
   const HandleModal = () => {
     if (user.isLoggedIn) {
       setOpen(true);
@@ -46,6 +46,8 @@ const ItemDetails = ({
         id={id}
         name={Name}
         startingPrice={startingPrice}
+        email={document.email}
+        userName={user.Name}
       />
       {/* btns bid edit */}
       <div className="flex gap-4 float-right -mt-8 lg:mt-0 z-50">
@@ -88,7 +90,7 @@ const ItemDetails = ({
         </div>
         <div className="w-full">
           {/* name price */}
-          <div className="mt-2 space-y-3 pl-3">
+          <div className="mt-2 space-y-3 lg:pl-3">
             {/* name */}
             <h2 className="text-2xl md:text-3xl line-clamp-1 mb-3">{Name}</h2>
             <Link href={`/user/${userId}`} className="mt-4">

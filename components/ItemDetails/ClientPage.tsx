@@ -1,11 +1,35 @@
 "use client";
 
-import { FetchDocument } from "@/Hooks/Hooks";
+import { useEffect, useState } from "react";
+import { doc, getDoc } from "firebase/firestore";
+
 import ItemDetails from "./ItemDetails";
+import { db } from "@/lib/firebase";
 
 const ClientPage = ({ id }: { id: string }) => {
-  const { document } = FetchDocument("items", id);
+  const [document, setDocument] = useState<itemProps | userProps | any>({});
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    const getDocument = async () => {
+      const docRef = doc(db, "items", id);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        // console.log("Document data:", docSnap.data());
+        const obj = {
+          id: id,
+          ...docSnap.data(),
+        };
+        setDocument(obj);
+        setIsLoading(false);
+      } else {
+        setIsLoading(false);
+        console.log("Document not found");
+      }
+    };
+    id && getDocument();
+  }, [id, document]);
   return (
     <div className="py-6 mb-20 p-5 lg:mb-10 bg-stone-900/10 dark:bg-stone-50/10 mt-6">
       {/* product card */}

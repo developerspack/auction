@@ -129,11 +129,15 @@ const UploadSingleItem = ({
                 />
               </div>
             ) : (
-              <video
-                className="w-[400px] h-[200px]"
-                controls
-                src={selectedFile}
-              />
+              <div className="p-2 bg-[#313030]/10 dark:bg-[#313030] rounded-lg w-[400px] h-[200px]">
+                <video
+                  src={selectedFile}
+                  height={500}
+                  width={500}
+                  className="rounded-lg h-full w-full"
+                  controls
+                />
+              </div>
             )}
           </div>
         </div>

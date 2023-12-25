@@ -203,6 +203,6 @@ export const FetchDocument = (collectionName: string, id: string) => {
       }
     };
     id && getDocument();
-  }, [id, document]);
+  }, [id]);
   return { isLoading, document };
 };

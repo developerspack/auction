@@ -6,7 +6,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 interface ModalProps {
   open: boolean;
-  setOpen: (value: boolean) => void;
+  setOpen?: (value: boolean) => void;
   children: React.ReactNode;
 }
 
