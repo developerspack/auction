@@ -5,6 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 
 import ItemDetails from "./ItemDetails";
 import { db } from "@/lib/firebase";
+import Bids from "./Bids";
 
 const ClientPage = ({ id }: { id: string }) => {
   const [document, setDocument] = useState<itemProps | userProps | any>({});
@@ -31,12 +32,15 @@ const ClientPage = ({ id }: { id: string }) => {
     id && getDocument();
   }, [id, document]);
   return (
-    <div className="py-6 mb-20 p-5 lg:mb-10 bg-stone-900/10 dark:bg-stone-50/10 mt-6">
-      {/* product card */}
-      <div className="mt-6 rounded-lg mb-24 md:mb-12 flex">
-        <ItemDetails {...document} />
+    <>
+      <div className="py-6 p-5 bg-stone-900/10 dark:bg-stone-50/10 mt-6 rounded-md shadow-xl">
+        {/* product card */}
+        <div className="mt-6 rounded-lg mb-24 md:mb-12 flex">
+          <ItemDetails {...document} />
+        </div>
       </div>
-    </div>
+      <Bids id={id} name={document.Name} />
+    </>
   );
 };
 

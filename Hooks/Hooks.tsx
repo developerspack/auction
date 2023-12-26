@@ -8,20 +8,13 @@ import {
   deleteDoc,
   doc,
   getDoc,
-  getDocs,
   onSnapshot,
-  orderBy,
   query,
   setDoc,
   updateDoc,
   where,
 } from "firebase/firestore";
-import {
-  deleteObject,
-  getDownloadURL,
-  ref,
-  uploadString,
-} from "firebase/storage";
+import { deleteObject, ref } from "firebase/storage";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { toast } from "react-hot-toast";
 
@@ -145,7 +138,9 @@ export const FetchCollection = (
   value: string | boolean,
   field: string
 ) => {
-  const [data, setData] = useState<itemProps | userProps | any>([]);
+  const [data, setData] = useState<itemProps | userProps | bidProps | any | []>(
+    []
+  );
   const [loading, setloading] = useState(true);
 
   const getCollection = () => {

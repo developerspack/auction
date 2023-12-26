@@ -7,14 +7,14 @@ import Moment from "react-moment";
 import { Button } from "@/components/ui/button";
 import CellActions from "./CellActions";
 
-export const columns: ColumnDef<itemProps>[] = [
+export const columns: ColumnDef<bidProps>[] = [
   {
-    accessorKey: "Thumbnail",
-    header: "Image",
+    accessorKey: "userPhoto",
+    header: "Bidder Photo",
     cell: ({ row }) => (
       <div className="text-center">
         <img
-          src={row.getValue("Thumbnail")}
+          src={row.getValue("userPhoto")}
           alt="itemImage"
           className="h-10 w-10 rounded-md"
         />
@@ -23,7 +23,7 @@ export const columns: ColumnDef<itemProps>[] = [
   },
 
   {
-    accessorKey: "Name",
+    accessorKey: "userName",
     header: ({ column }) => {
       return (
         <Button
@@ -31,14 +31,14 @@ export const columns: ColumnDef<itemProps>[] = [
           className="-ml-[20px]"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Name
+          Bidder
           <RiArrowUpDownFill className="ml-2 h-4 w-4" />
         </Button>
       );
     },
   },
   {
-    accessorKey: "startingPrice",
+    accessorKey: "bid",
     header: ({ column }) => {
       return (
         <Button
@@ -46,13 +46,13 @@ export const columns: ColumnDef<itemProps>[] = [
           className="-ml-[20px]"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Starting Price
+          Bid
           <RiArrowUpDownFill className="ml-2 h-4 w-4" />
         </Button>
       );
     },
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("startingPrice"));
+      const amount = parseFloat(row.getValue("bid"));
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "Ksh",
@@ -62,18 +62,28 @@ export const columns: ColumnDef<itemProps>[] = [
     },
   },
   {
-    accessorKey: "bidding",
-    header: "Bidding is",
+    accessorKey: "createdAt",
+    header: "Bid",
+    cell: ({ row }) => <Moment fromNow>{row.getValue("createdAt")}</Moment>,
   },
-
   {
-    accessorKey: "expiryDate",
-    header: "Closes or closed",
-    cell: ({ row }) => <Moment fromNow>{row.getValue("expiryDate")}</Moment>,
+    accessorKey: "BidStatus",
+    header: "Bid's Status",
+    cell: ({ row }) => (
+      <>
+        {row.getValue("BidStatus") === "pending" ? (
+          <p className="bg-blue-500 p-2 w-20 text-center rounded-md">Pending</p>
+        ) : (
+          <p className="bg-green-500 p-2 w-20 text-center rounded-md">
+            Accepted
+          </p>
+        )}
+      </>
+    ),
   },
   {
     id: "actions",
     header: "Actions",
-    cell: ({ row }) => <CellActions data={row.original} Name="products" />,
+    cell: ({ row }) => <CellActions data={row.original} />,
   },
 ];

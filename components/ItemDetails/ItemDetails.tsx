@@ -25,6 +25,10 @@ const ItemDetails = ({
   startingPrice,
 }: itemProps) => {
   const [open, setOpen] = useState(false);
+  const formatted = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "Ksh",
+  }).format(startingPrice);
 
   const { user } = useUserStore();
   const { document } = FetchDocument("users", userId);
@@ -106,7 +110,7 @@ const ItemDetails = ({
             {/* price */}
             <div className="flex items-center gap-2">
               <span className="text-blue-300">Starting Price:</span>
-              <span className="text-xl font-bold">Ksh.{startingPrice}</span>
+              <span className="text-xl font-bold">{formatted}</span>
             </div>
             <div className="p-2 bg-[#313030]/10 dark:bg-[#313030] rounded-lg mb-2 md:mb-0">
               <span className="font-semibold text-lg p-2">Item Show Case:</span>

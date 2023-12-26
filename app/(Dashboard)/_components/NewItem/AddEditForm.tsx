@@ -111,6 +111,8 @@ const AddEditForm = ({ initialData, id }: AddEditFormProps) => {
       ...values,
       userId: user.id,
       expiryDate: `${value}`,
+      BidAccepted:
+        Object.keys(initialData).length > 0 ? initialData.BidAccepted : false,
     };
 
     try {

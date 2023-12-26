@@ -19,3 +19,15 @@ interface userProps {
   photo: string;
   createdAt: string;
 }
+
+interface bidProps {
+  id: string;
+  userName: string;
+  userEmail: string;
+  userPhoto: string;
+  userId: string;
+  bid: number;
+  ItemId: string;
+  BidStatus: boolean;
+  createdAt: string;
+}

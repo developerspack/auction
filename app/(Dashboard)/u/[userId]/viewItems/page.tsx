@@ -1,11 +1,7 @@
 import ItemsClient from "@/app/(Dashboard)/_components/viewItems/ItemsClient";
 
 const ViewItemPage = () => {
-  return (
-    <div>
-      <ItemsClient />
-    </div>
-  );
+  return <ItemsClient />;
 };
 
 export default ViewItemPage;

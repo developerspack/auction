@@ -51,6 +51,10 @@ const BidModal = ({
 }: BidModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useUserStore();
+  const formatted = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "Ksh",
+  }).format(startingPrice);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -71,12 +75,16 @@ const BidModal = ({
       });
       try {
         await addDoc(collection(db, "bids"), {
-          bid: values.bid,
+          userName: user.Name,
+          userEmail: user.email,
+          userPhoto: user.photo,
           userId: user.id,
+          bid: values.bid,
           ItemId: id,
-          createdAt: Timestamp.now().toDate(),
+          BidStatus: "pending",
+          createdAt: Timestamp.now().toDate().toString(),
         });
-        toast.success("Bid Sent Successfully", {
+        toast.success("Bid Sent", {
           id: notification,
         });
       } catch (error) {
@@ -98,7 +106,7 @@ const BidModal = ({
           you&apos;re done.
         </DialogDescription>
         <span className="text-blue-500">
-          N/B: Bid More than the starting price: Ksh.{startingPrice}
+          N/B: Bid More than the starting price: {formatted}
         </span>
       </DialogHeader>
       <Form {...form}>
