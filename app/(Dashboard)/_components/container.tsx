@@ -32,7 +32,10 @@ export const Container = ({ children }: ContainerProps) => {
 
   return (
     <div
-      className={cn("flex-1", collapsed ? "ml-[70px]" : "ml-[70px] lg:ml-60")}
+      className={cn(
+        "flex-1 mt-24",
+        collapsed ? "ml-[70px]" : "ml-[70px] lg:ml-60"
+      )}
     >
       {children}
     </div>

@@ -46,7 +46,7 @@ export const LoginWithGoogle = () => {
               email: result.user.email,
               photo: result.user.photoURL,
               name: result.user.displayName,
-              createdAt: Timestamp.now().toDate(),
+              createdAt: Timestamp.now().toDate().toString(),
             });
           }
         };
@@ -105,7 +105,7 @@ export const uploadDocument = async (
   try {
     await addDoc(collection(db, collectionName), {
       ...values,
-      createdAt: Timestamp.now().toDate(),
+      createdAt: Timestamp.now().toDate().toString(),
     });
     toast.success(`${collectionName} Created Successfully!`, {
       id: notification,
@@ -127,7 +127,7 @@ export const UpdateDcoument = async (
   try {
     await updateDoc(doc(db, collectionName, id), {
       ...values,
-      updatedAt: Timestamp.now().toDate(),
+      updatedAt: Timestamp.now().toDate().toString(),
     });
     toast.success(`${collectionName} Updated Successfully!`, {
       id: notification,
@@ -205,4 +205,37 @@ export const FetchDocument = (collectionName: string, id: string) => {
     id && getDocument();
   }, [id]);
   return { isLoading, document };
+};
+
+// get collection
+export const FetchDocuments = (collectionName: string) => {
+  const [data, setData] = useState<itemProps | userProps | any>([]);
+  const [loading, setloading] = useState(true);
+
+  const getCollection = () => {
+    try {
+      const q = query(collection(db, collectionName));
+      // const q = query(docRef, orderBy("createdAt", "desc"));
+      onSnapshot(q, (snapshot) => {
+        // console.log(snapshot.docs);
+        const allData = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        // console.log(allData);
+        // @ts-ignore
+        setData(allData);
+        setloading(false);
+      });
+    } catch (error) {
+      setloading(false);
+      toast.error((error as Error).message);
+    }
+  };
+
+  useEffect(() => {
+    getCollection();
+  }, []);
+
+  return { data, loading };
 };

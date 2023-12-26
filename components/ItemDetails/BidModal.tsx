@@ -52,8 +52,6 @@ const BidModal = ({
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useUserStore();
 
-  useEffect(() => {}, [userName]);
-
   const form = useForm({
     resolver: zodResolver(formSchema),
   });

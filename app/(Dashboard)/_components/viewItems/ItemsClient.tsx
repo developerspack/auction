@@ -8,7 +8,6 @@ import { columns } from "./Columns";
 import { FetchCollection } from "@/Hooks/Hooks";
 import { useUserStore } from "@/store/user";
 import Heading from "@/components/heading";
-import { Separator } from "@/components/ui/separator";
 
 const ItemsClient = () => {
   const { user } = useUserStore();
@@ -16,9 +15,11 @@ const ItemsClient = () => {
   const { data } = FetchCollection("items", user.id, "userId");
 
   return (
-    <div className="h-full w-full">
-      <Heading title={"View Items"} description={"View and Edit Items"} />
-      <Separator />
+    <div className="px-4">
+      <div className="flex items-center justify-between pb-8">
+        <Heading title={"View Items"} description={"View and Edit Items"} />
+      </div>
+
       <Suspense fallback={<ItemsSkeleton />}>
         <DataTable columns={columns} data={data} filterKey={"Name"} />
       </Suspense>

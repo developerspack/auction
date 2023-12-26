@@ -84,7 +84,9 @@ const ItemDetails = ({
             />
           </div>
           <div className="mt-2 overflow-auto">
-            <div className="text-lg text-bold mb-2">Bidding Closes in:</div>
+            <div className="text-lg text-bold mb-2 pl-4">
+              Bidding Closes in:
+            </div>
             {expiryDate && <CountDown expiryDate={expiryDate} />}
           </div>
         </div>
@@ -125,7 +127,7 @@ const ItemDetails = ({
         <div className="text-lg text-bold">Description:</div>
         <div className="ml-28">{Description}</div>
       </div>
-      <div className="px-10 lg:px-20 pt-4">
+      <div className="px-7 lg:px-14 pt-4">
         <p className="text-2xl md:text-3xl line-clamp-1">Gallery</p>
         {otherImages && <ImageCarousel otherImages={otherImages} />}
       </div>

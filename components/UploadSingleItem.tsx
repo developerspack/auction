@@ -129,7 +129,7 @@ const UploadSingleItem = ({
                 />
               </div>
             ) : (
-              <div className="p-2 bg-[#313030]/10 dark:bg-[#313030] rounded-lg w-[400px] h-[200px]">
+              <div className="p-2 bg-[#313030]/10 dark:bg-[#313030] rounded-lg w-[250px] h-[200px]">
                 <video
                   src={selectedFile}
                   height={500}

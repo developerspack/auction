@@ -130,11 +130,10 @@ const AddEditForm = ({ initialData, id }: AddEditFormProps) => {
 
   // console.log(form.formState.errors);
   return (
-    <>
-      <div className="flex items-center justify-between pl-4 pb-4">
+    <div className="mt-4">
+      <div className="flex items-center justify-between pl-4 pb-8">
         <Heading title={title} description={description} />
       </div>
-      <Separator />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="p-4">
           {/* image */}
@@ -301,7 +300,7 @@ const AddEditForm = ({ initialData, id }: AddEditFormProps) => {
           </Button>
         </form>
       </Form>
-    </>
+    </div>
   );
 };
 

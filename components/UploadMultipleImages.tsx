@@ -121,7 +121,7 @@ const UploadMultipleImages = ({
               <MdDelete className="h-4 w-4" />
             </Button>
           </div>
-          <div className="overflow-y-auto flex gap-1 scrollbar scrollbar-none">
+          <div className="overflow-x-auto flex gap-1 scrollbar">
             {selectedFile.map((image, index) => (
               <Image
                 src={image}
