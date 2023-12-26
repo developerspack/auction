@@ -3,15 +3,19 @@
 import { useEffect } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 import { cn } from "@/lib/utils";
 import { useAuctioneerSidebar } from "@/store/use-creator-sidebar";
+import { useUserStore } from "@/store/user";
 
 interface ContainerProps {
   children: React.ReactNode;
 }
 
 export const Container = ({ children }: ContainerProps) => {
+  const { user } = useUserStore();
+
   const router = useRouter();
   const { collapsed, onCollapse, onExpand } = useAuctioneerSidebar(
     (state) => state
@@ -26,10 +30,29 @@ export const Container = ({ children }: ContainerProps) => {
     }
   }, [matches, onCollapse, onExpand]);
 
-  // useEffect(() => {
-
-  // }, []);
-
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      let auth = localStorage.getItem("auth");
+      auth = auth
+        ? JSON.parse(auth)
+        : {
+            isLoggedIn: false,
+            id: "",
+            email: "",
+            Name: "",
+            photo: "",
+            createdAt: "",
+          };
+      // @ts-ignore
+      if (!auth?.isLoggedIn) {
+        router.push("/");
+        toast.error("Sign In To Access The Page");
+      }
+    }, 2000);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
   return (
     <div
       className={cn(

@@ -67,12 +67,6 @@ const BidModal = ({
     } else {
       setIsLoading(true);
       const notification = toast.loading("Sending Bid...");
-      const message = `${user.Name} have bid Ksh.${values.bid} for ${name}`;
-      const subject = `A Bid for ${name}`;
-      await fetch("/api/email", {
-        method: "POST",
-        body: JSON.stringify({ email, message, subject }),
-      });
       try {
         await addDoc(collection(db, "bids"), {
           userName: user.Name,
@@ -83,6 +77,12 @@ const BidModal = ({
           ItemId: id,
           BidStatus: "pending",
           createdAt: Timestamp.now().toDate().toString(),
+        });
+        const message = `${user.Name} have bid Ksh.${values.bid} for ${name}`;
+        const subject = `A Bid for ${name}`;
+        await fetch("/api/email", {
+          method: "POST",
+          body: JSON.stringify({ email, message, subject }),
         });
         toast.success("Bid Sent", {
           id: notification,

@@ -9,7 +9,7 @@ interface ItemCardProps {
   data: itemProps;
 }
 
-export const ResultCard = ({ data }: ItemCardProps) => {
+export const ItemCard = ({ data }: ItemCardProps) => {
   const { document } = FetchDocument("users", data.userId);
   return (
     <Link href={`/${data.id}`}>

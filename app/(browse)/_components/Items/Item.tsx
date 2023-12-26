@@ -2,7 +2,7 @@
 
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { ResultCard, ResultCardSkeleton } from "./ItemCard";
+import { ItemCard, ResultCardSkeleton } from "./ItemCard";
 import { FetchCollection } from "@/Hooks/Hooks";
 
 export const Item = async () => {
@@ -18,7 +18,7 @@ export const Item = async () => {
       )}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2">
         {data.map((result: itemProps) => (
-          <ResultCard key={result.id} data={result} />
+          <ItemCard key={result.id} data={result} />
         ))}
       </div>
     </div>
