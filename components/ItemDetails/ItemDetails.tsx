@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BiDollar } from "react-icons/bi";
 import { FaEdit } from "react-icons/fa";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 import ImageCarousel from "./ImageCarousel";
 import CountDown from "../CountDown";
@@ -23,7 +24,16 @@ const ItemDetails = ({
   expiryDate,
   userId,
   startingPrice,
+  BidAccepted,
 }: itemProps) => {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (BidAccepted) {
+      router.push("/");
+    }
+  }, []);
+
   const [open, setOpen] = useState(false);
   const formatted = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -32,6 +42,7 @@ const ItemDetails = ({
 
   const { user } = useUserStore();
   const { document } = FetchDocument("users", userId);
+
   // console.log(user);
   const HandleModal = () => {
     if (user.isLoggedIn) {
@@ -42,6 +53,7 @@ const ItemDetails = ({
       });
     }
   };
+
   return (
     <div className="w-full">
       <BidModal

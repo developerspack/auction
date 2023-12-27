@@ -9,6 +9,7 @@ interface itemProps {
   expiryDate: string;
   userId: string;
   startingPrice: number;
+  BidAccepted: boolean;
 }
 
 interface userProps {
