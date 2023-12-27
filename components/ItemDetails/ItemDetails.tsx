@@ -145,7 +145,7 @@ const ItemDetails = ({
       </div>
       <div className="mt-4 pl-4 bg-[#313030]/10 dark:bg-[#313030] p-2 rounded-md overflow-auto">
         <div className="text-lg text-bold">Description:</div>
-        <div className="ml-28">{Description}</div>
+        <div className="lg:ml-28 ml-2 text-sm lg:text-base">{Description}</div>
       </div>
       <div className="px-7 lg:px-14 pt-4">
         <p className="text-2xl md:text-3xl line-clamp-1">Gallery</p>
