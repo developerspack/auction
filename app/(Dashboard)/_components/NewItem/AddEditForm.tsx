@@ -36,9 +36,9 @@ import { useUserStore } from "@/store/user";
 const formSchema = z.object({
   Name: z.string().min(1),
   Thumbnail: z.string().min(1),
-  otherImages: z.string().array().optional(),
+  otherImages: z.string().array().optional().default([]),
   bidding: z.string().default("Open"),
-  video: z.string().min(1).optional(),
+  video: z.string().min(1).optional().default(""),
   Description: z.string().min(1),
   startingPrice: z.coerce.number().default(0),
 });
