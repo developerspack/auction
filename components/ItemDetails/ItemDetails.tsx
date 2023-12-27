@@ -149,10 +149,14 @@ const ItemDetails = ({
       </div>
       <div className="px-7 lg:px-14 pt-4">
         <p className="text-2xl md:text-3xl line-clamp-1">Gallery</p>
-        {otherImages ? (
-          <ImageCarousel otherImages={otherImages} />
-        ) : (
-          <h3 className="font-bold text-lg">Not Available</h3>
+        {otherImages && (
+          <>
+            {otherImages.length !== 0 ? (
+              <ImageCarousel otherImages={otherImages} />
+            ) : (
+              <h3 className="font-bold text-lg">Not Available</h3>
+            )}
+          </>
         )}
       </div>
     </div>

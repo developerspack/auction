@@ -77,7 +77,7 @@ const UploadMultipleImages = ({
   return (
     <div className="pb-4">
       {/* upload btn */}
-      {!selectedFile && (
+      {selectedFile?.length === 0 && (
         <Button
           className="gap-2"
           type="button"
@@ -109,7 +109,7 @@ const UploadMultipleImages = ({
         </Button>
       )}
       {/* Image View */}
-      {selectedFile && (
+      {selectedFile?.length! > 0 && (
         <div className="flex items-start space-x-2">
           <div className="absolute items-center justify-center ml-2">
             <Button
@@ -122,7 +122,7 @@ const UploadMultipleImages = ({
             </Button>
           </div>
           <div className="overflow-x-auto flex gap-1 scrollbar">
-            {selectedFile.map((image, index) => (
+            {selectedFile?.map((image, index) => (
               <Image
                 src={image}
                 className="w-full h-[20%] rounded-2xl max-h-40 object-contain pb-2"

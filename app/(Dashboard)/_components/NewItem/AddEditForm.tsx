@@ -38,7 +38,7 @@ const formSchema = z.object({
   Thumbnail: z.string().min(1),
   otherImages: z.string().array().optional().default([]),
   bidding: z.string().default("Open"),
-  video: z.string().min(1).optional().default(""),
+  video: z.string().optional().default(""),
   Description: z.string().min(1),
   startingPrice: z.coerce.number().default(0),
 });
@@ -55,9 +55,9 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 const AddEditForm = ({ initialData, id }: AddEditFormProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [otherImages, setOtherImages] = useState<string[] | null>(null);
+  const [otherImages, setOtherImages] = useState<string[] | null>([]);
   const [thumbnail, setTumbnail] = useState<string | null>(null);
-  const [video, setVideo] = useState<string | null>(null);
+  const [video, setVideo] = useState<string | null>("");
   const [value, setValue] = useState<Value>(new Date());
 
   const { user } = useUserStore();

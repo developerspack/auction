@@ -11,6 +11,10 @@ interface ItemCardProps {
 
 export const ItemCard = ({ data }: ItemCardProps) => {
   const { document } = FetchDocument("users", data.userId);
+  const formatted = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "Ksh",
+  }).format(data.startingPrice);
   return (
     <Link href={`/${data.id}`}>
       <div className="h-full w-full space-y-4 bg-stone-900/10 dark:bg-stone-50/10 rounded-md">
@@ -34,6 +38,10 @@ export const ItemCard = ({ data }: ItemCardProps) => {
             <p className="truncate font-semibold text-base hover:text-blue-500">
               {data.Name}
             </p>
+            <div className="flex items-center gap-2">
+              <span className="text-blue-300">Starting Price:</span>
+              <span className="text-base font-bold">{formatted}</span>
+            </div>
             <Link
               href={`/user/${data.userId}`}
               className="truncate font-semibold"
