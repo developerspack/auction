@@ -127,13 +127,17 @@ const ItemDetails = ({
             <div className="p-2 bg-[#313030]/10 dark:bg-[#313030] rounded-lg mb-2 md:mb-0">
               <span className="font-semibold text-lg p-2">Item Show Case:</span>
               <div className="rounded-lg h-[300px]">
-                <video
-                  src={video}
-                  height={500}
-                  width={500}
-                  className="rounded-lg h-full w-full"
-                  controls
-                />
+                {video ? (
+                  <video
+                    src={video}
+                    height={500}
+                    width={500}
+                    className="rounded-lg h-full w-full"
+                    controls
+                  />
+                ) : (
+                  <h3 className="font-bold text-lg">Not Available</h3>
+                )}
               </div>
             </div>
           </div>
@@ -145,7 +149,11 @@ const ItemDetails = ({
       </div>
       <div className="px-7 lg:px-14 pt-4">
         <p className="text-2xl md:text-3xl line-clamp-1">Gallery</p>
-        {otherImages && <ImageCarousel otherImages={otherImages} />}
+        {otherImages ? (
+          <ImageCarousel otherImages={otherImages} />
+        ) : (
+          <h3 className="font-bold text-lg">Not Available</h3>
+        )}
       </div>
     </div>
   );

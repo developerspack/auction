@@ -36,9 +36,9 @@ import { useUserStore } from "@/store/user";
 const formSchema = z.object({
   Name: z.string().min(1),
   Thumbnail: z.string().min(1),
-  otherImages: z.string().array(),
+  otherImages: z.string().array().optional(),
   bidding: z.string().default("Open"),
-  video: z.string().min(1),
+  video: z.string().min(1).optional(),
   Description: z.string().min(1),
   startingPrice: z.coerce.number().default(0),
 });
@@ -165,7 +165,7 @@ const AddEditForm = ({ initialData, id }: AddEditFormProps) => {
             name="otherImages"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Upload Other Images</FormLabel>
+                <FormLabel>Upload Other Images(Optional)</FormLabel>
                 <FormControl>
                   <UploadMultipleImages
                     disabled={isLoading}
@@ -185,7 +185,7 @@ const AddEditForm = ({ initialData, id }: AddEditFormProps) => {
             name="video"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Video</FormLabel>
+                <FormLabel>Video Show Case (Optional)</FormLabel>
                 <FormControl>
                   <UploadSingleItem
                     disabled={isLoading}
