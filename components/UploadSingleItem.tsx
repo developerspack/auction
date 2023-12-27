@@ -100,7 +100,7 @@ const UploadSingleItem = ({
                 accept={type === "image" ? "image/*" : "video/*"}
                 onChange={addItem}
               />
-              Upload an {type}
+              Upload {type}
             </>
           )}
         </Button>

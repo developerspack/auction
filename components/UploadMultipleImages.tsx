@@ -103,7 +103,7 @@ const UploadMultipleImages = ({
                 hidden
                 onChange={addItem}
               />
-              Upload an Image
+              Upload Images
             </>
           )}
         </Button>
