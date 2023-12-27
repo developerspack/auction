@@ -32,7 +32,7 @@ const ItemDetails = ({
     if (BidAccepted) {
       router.push("/");
     }
-  }, []);
+  }, [BidAccepted]);
 
   const [open, setOpen] = useState(false);
   const formatted = new Intl.NumberFormat("en-US", {
