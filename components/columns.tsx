@@ -74,6 +74,6 @@ export const columns: ColumnDef<itemProps>[] = [
   {
     id: "actions",
     header: "Actions",
-    cell: ({ row }) => <CellActions data={row.original} Name="Item" />,
+    cell: ({ row }) => <CellActions data={row.original} Name="items" />,
   },
 ];
