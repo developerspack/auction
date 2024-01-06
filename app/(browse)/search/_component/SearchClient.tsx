@@ -8,8 +8,15 @@ import { ResultsSkeleton } from "../../_components/Items/Item";
 
 const SearchClient = ({ query }: { query?: string }) => {
   const { data } = FetchCollection("items", "Open", "bidding");
+  const currentDate = new Date();
 
-  const FilteredItems = data.filter((item: itemProps) =>
+  // Filter the data to get only items that have not expired
+  const NonExpiredItems = data.filter((item: itemProps) => {
+    const expiryDate = new Date(item.expiryDate);
+    return expiryDate > currentDate; // Compare expiryDate with current date
+  });
+
+  const FilteredItems = NonExpiredItems.filter((item: itemProps) =>
     item.Name.toLowerCase().includes(query!.toLowerCase())
   );
 
