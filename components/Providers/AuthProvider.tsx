@@ -19,7 +19,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         };
     //@ts-ignore
     setUser(auth);
-    // console.log(user);
+    console.log(user);
     // console.log(auth);
   }, []);
   return <>{children}</>;

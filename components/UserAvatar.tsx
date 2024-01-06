@@ -27,7 +27,6 @@ const UserAvatar = () => {
       email: "",
       Name: "",
       photo: "",
-      createdAt: "",
     });
     localStorage.setItem(
       "auth",
@@ -37,7 +36,6 @@ const UserAvatar = () => {
         email: "",
         Name: "",
         photo: "",
-        createdAt: "",
       })
     );
     router.push("/");
