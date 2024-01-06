@@ -55,7 +55,9 @@ const CellActions = ({ data, Name }: CellActionProps) => {
               Edit
             </DropdownMenuItem>
             <DropdownMenuItem
-              onClick={() => HandleDelete(data.id, Name, data.Thumbnail)}
+              onClick={() =>
+                HandleDelete(data.id, Name, data.Thumbnail, data.otherImages)
+              }
             >
               <AiFillDelete className="h-4 w-4 mr-2 text-red-500" />
               Delete

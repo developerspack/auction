@@ -125,7 +125,9 @@ const ItemDetails = ({
               <span className="text-xl font-bold">{formatted}</span>
             </div>
             <div className="p-2 bg-[#313030]/10 dark:bg-[#313030] rounded-lg mb-2 md:mb-0">
-              <span className="font-semibold text-lg p-2">Item Show Case:</span>
+              <span className="font-semibold text-lg p-2">
+                Video Show Case:
+              </span>
               <div className="rounded-lg h-[300px]">
                 {video ? (
                   <video

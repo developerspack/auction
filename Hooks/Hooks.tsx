@@ -72,13 +72,22 @@ export const LoginWithGoogle = () => {
 export const HandleDelete = async (
   id: string,
   collectionName: string,
-  imageUrl?: string
+  imageUrl?: string,
+  otherImages?: string[]
 ) => {
   const notification = toast.loading(`Deleteting ${collectionName}...`);
   try {
+    if (imageUrl) {
+      const storageRef = ref(storage, imageUrl);
+      await deleteObject(storageRef);
+    }
+    if (otherImages) {
+      for (const image of otherImages) {
+        const storageRef = ref(storage, image);
+        await deleteObject(storageRef);
+      }
+    }
     await deleteDoc(doc(db, collectionName, id));
-    const storageRef = ref(storage, imageUrl);
-    await deleteObject(storageRef);
     toast.success(`${collectionName} Deleteted Successfully!`, {
       id: notification,
     });
