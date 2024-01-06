@@ -112,7 +112,7 @@ const CellActions = ({ data }: CellActionProps) => {
             </>
           )}
           {user.id !== document.userId && user.id !== data.userId && (
-            <DropdownMenuItem>No Available Actions</DropdownMenuItem>
+            <DropdownMenuItem>No Actions Available</DropdownMenuItem>
           )}
         </DropdownMenuContent>
       </DropdownMenu>
