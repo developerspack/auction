@@ -4,7 +4,7 @@ interface itemProps {
   Thumbnail: string;
   video: string;
   otherImages: string[];
-  bidding: boolean;
+  bidding: string;
   Description: string;
   expiryDate: string;
   userId: string;

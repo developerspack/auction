@@ -24,15 +24,15 @@ const ItemDetails = ({
   expiryDate,
   userId,
   startingPrice,
-  BidAccepted,
+  bidding,
 }: itemProps) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (BidAccepted) {
+    if (bidding === "Closed") {
       router.push("/");
     }
-  }, [BidAccepted]);
+  }, [bidding]);
 
   const [open, setOpen] = useState(false);
   const formatted = new Intl.NumberFormat("en-US", {
