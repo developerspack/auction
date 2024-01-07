@@ -73,11 +73,16 @@ export const HandleDelete = async (
   id: string,
   collectionName: string,
   imageUrl?: string,
-  otherImages?: string[]
+  otherImages?: string[],
+  video?: string
 ) => {
   const notification = toast.loading(`Deleteting ${collectionName}...`);
   try {
     if (imageUrl) {
+      const storageRef = ref(storage, imageUrl);
+      await deleteObject(storageRef);
+    }
+    if (video) {
       const storageRef = ref(storage, imageUrl);
       await deleteObject(storageRef);
     }
