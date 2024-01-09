@@ -9,6 +9,7 @@ import {
   uploadBytes,
 } from "firebase/storage";
 import Image from "next/image";
+import uniqid from "uniqid";
 
 import { Button } from "@/components/ui/button";
 import { MdDelete } from "react-icons/md";
@@ -46,7 +47,7 @@ const UploadMultipleImages = ({
     try {
       const imageURLs = []; // Create an array to store the download URLs
       for (const file of files) {
-        const imageRef = ref(storage, `${uploadingTo}/${file.name}`);
+        const imageRef = ref(storage, `${uploadingTo}/${uniqid()}`);
         await uploadBytes(imageRef, file, {});
         const downloadURL = await getDownloadURL(imageRef);
         imageURLs.push(downloadURL); // Add the download URL to the array

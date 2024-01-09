@@ -10,6 +10,7 @@ import {
 } from "firebase/storage";
 import Image from "next/image";
 import { toast } from "react-hot-toast";
+import uniqid from "uniqid";
 
 import { Button } from "@/components/ui/button";
 import { MdDelete } from "react-icons/md";
@@ -47,7 +48,7 @@ const UploadSingleItem = ({
     const notification = toast.loading(`Uploading ${type}...`);
     const file = e.target.files[0];
     try {
-      const imageRef = ref(storage, `${uploadingTo}/${file.name}`);
+      const imageRef = ref(storage, `${uploadingTo}/${uniqid()}`);
       await uploadBytes(imageRef, file, {});
       const downloadURL = await getDownloadURL(imageRef);
       setSelectedFile(downloadURL);
