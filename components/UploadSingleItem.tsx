@@ -65,7 +65,7 @@ const UploadSingleItem = ({
 
   // delete
   const DeleteImage = async () => {
-    setSelectedFile(null);
+    setSelectedFile("");
     if (selectedFile) {
       const storageRef = ref(storage, selectedFile);
       await deleteObject(storageRef);
@@ -75,7 +75,7 @@ const UploadSingleItem = ({
   return (
     <div className="pb-4">
       {/* upload btn */}
-      {!selectedFile && (
+      {selectedFile === "" && (
         <Button
           className="gap-2"
           type="button"

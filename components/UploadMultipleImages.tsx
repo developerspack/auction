@@ -66,7 +66,7 @@ const UploadMultipleImages = ({
 
   // delete
   const DeleteImage = async () => {
-    setSelectedFile(null);
+    setSelectedFile([]);
     if (selectedFile) {
       for (const url of selectedFile) {
         const storageRef = ref(storage, url);
