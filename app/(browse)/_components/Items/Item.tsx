@@ -21,7 +21,7 @@ export const Item = () => {
       ) : (
         <>
           <h2 className="text-lg font-semibold mb-4">
-            Items we think you&apos;ll like
+            Items we think you will like
           </h2>
           {NonExpiredItems.length === 0 && (
             <div className="text-muted-foreground text-sm">No Items found.</div>

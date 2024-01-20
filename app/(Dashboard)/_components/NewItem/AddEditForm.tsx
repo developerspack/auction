@@ -56,7 +56,7 @@ const AddEditForm = ({ initialData, id }: AddEditFormProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [otherImages, setOtherImages] = useState<string[] | null>([]);
-  const [thumbnail, setTumbnail] = useState<string | null>(null);
+  const [thumbnail, setTumbnail] = useState<string | null>("");
   const [video, setVideo] = useState<string | null>("");
   const [value, setValue] = useState<Value>(new Date());
 

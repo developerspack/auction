@@ -30,7 +30,7 @@ export const ItemCard = ({ data }: ItemCardProps) => {
           />
         </div>
         <span className="font-medium text-lg text-blue-500">
-          Bidding Closes In:{" "}
+          Bidding Closes:{" "}
         </span>{" "}
         <div className="overflow-auto">
           <CountDown expiryDate={data.expiryDate} />
